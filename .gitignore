@@ -1,0 +1,17 @@
+node_modules/
+dist/
+build/
+.env
+.env.local
+*.db
+*.db-journal
+.DS_Store
+.vite/
+backend/data/
+frontend/dist/
+*.log
+.turbo/
+coverage/
+.idea/
+.vscode/
+!extension/icons/
