@@ -1,13 +1,13 @@
 # Dropwatch
 
-Price drop tracker: paste a product URL (or add it from a bookmarklet, Chrome extension, or WhatsApp), and Dropwatch checks the price on a schedule, stores history, and alerts you when it falls.
+Price drop tracker: paste a product URL (or add it from a bookmarklet or Chrome extension), and Dropwatch checks the price on a schedule, stores history, and emails you when it falls.
 
 ## Stack
 
 - **Frontend:** React, Vite, Tailwind CSS, Recharts
 - **Backend:** Node.js 22+, Express, Cheerio (optional Puppeteer), node-cron, JWT auth
 - **Database:** SQLite via `node:sqlite` (swap the file for Postgres later if you deploy)
-- **Alerts:** Nodemailer + WhatsApp Cloud API
+- **Alerts:** Email via Nodemailer
 
 ## Run locally
 
@@ -36,10 +36,6 @@ Copy `.env.example`. Important keys:
 | `JWT_SECRET` | Signs login tokens |
 | `CHECK_INTERVAL_HOURS` | Cron interval (default 6) |
 | `SMTP_*` | Email alerts (logs to console if unset) |
-| `WHATSAPP_TOKEN` | Meta Cloud API access token |
-| `WHATSAPP_PHONE_NUMBER_ID` | WhatsApp Business phone number ID |
-| `WHATSAPP_VERIFY_TOKEN` | Token you set in the Meta webhook |
-| `WHATSAPP_DISPLAY_NUMBER` | Human-readable number shown in Settings |
 | `ENABLE_PUPPETEER` | `true` to fall back to a headless browser for JS-heavy shops |
 | `VITE_API_PUBLIC_URL` | Public API origin used by the bookmarklet and extension |
 
@@ -56,17 +52,16 @@ Dashboard or Settings → drag **Track with Dropwatch** onto the bookmarks bar. 
 
 Customize `extension/manifest.json` (icons, domain list) and `extension/content.js` (button placement) as needed.
 
-## WhatsApp bot
+## Email alerts
 
-Uses the official [WhatsApp Cloud API](https://developers.facebook.com/docs/whatsapp/cloud-api).
+When a tracked price hits the target, Dropwatch emails the address the user signed up with. No extra number or bot to connect.
 
-1. Create a Meta app with WhatsApp, then set `WHATSAPP_TOKEN`, `WHATSAPP_PHONE_NUMBER_ID`, and `WHATSAPP_VERIFY_TOKEN`
-2. Point the webhook at `https://your-api.onrender.com/api/whatsapp/webhook` (verify token must match)
-3. Restart the API
-4. Message the business number, send `connect`, and enter the code in Dropwatch → Settings
-5. Paste product links in that chat
+1. Set `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`, `SMTP_PASS`, and `SMTP_FROM` (Gmail needs an [app password](https://myaccount.google.com/apppasswords))
+2. Restart the API
+3. In the app, set a target on a product
+4. When the price reaches that target, the user gets a drop email
 
-For local testing, expose the API with a tunnel (ngrok, Cloudflare Tunnel) so Meta can reach the webhook.
+If SMTP is unset, alerts print to the API console instead of sending.
 
 ## Deploy
 
