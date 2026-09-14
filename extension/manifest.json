@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Dropwatch",
   "description": "Track this price — send any product page to your Dropwatch watchlist.",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "permissions": ["activeTab", "storage"],
   "host_permissions": [
     "http://localhost:3001/*",
@@ -12,6 +12,11 @@
   ],
   "background": {
     "service_worker": "background.js"
+  },
+  "browser_specific_settings": {
+    "safari": {
+      "strict_min_version": "16.4"
+    }
   },
   "action": {
     "default_popup": "popup.html",

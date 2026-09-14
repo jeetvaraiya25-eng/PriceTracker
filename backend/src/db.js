@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS users (
   email TEXT UNIQUE NOT NULL,
   password_hash TEXT NOT NULL,
   whatsapp_phone TEXT UNIQUE,
+  plan TEXT NOT NULL DEFAULT 'free',
   created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
@@ -29,6 +30,7 @@ CREATE TABLE IF NOT EXISTS products (
   source_url TEXT NOT NULL,
   source_site TEXT,
   whatsapp_alerts INTEGER NOT NULL DEFAULT 0,
+  currency TEXT NOT NULL DEFAULT 'USD',
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
   FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
@@ -81,6 +83,12 @@ function migrateFromTelegram() {
   if (!userCols.includes("whatsapp_phone")) {
     db.exec("ALTER TABLE users ADD COLUMN whatsapp_phone TEXT");
   }
+  if (!userCols.includes("name")) {
+    db.exec("ALTER TABLE users ADD COLUMN name TEXT");
+  }
+  if (!userCols.includes("plan")) {
+    db.exec("ALTER TABLE users ADD COLUMN plan TEXT NOT NULL DEFAULT 'free'");
+  }
   if (userCols.includes("telegram_chat_id")) {
     db.exec(`
       UPDATE users
@@ -99,6 +107,13 @@ function migrateFromTelegram() {
       SET whatsapp_alerts = telegram_alerts
       WHERE whatsapp_alerts = 0 AND telegram_alerts = 1
     `);
+  }
+  if (!productCols.includes("currency")) {
+    db.exec("ALTER TABLE products ADD COLUMN currency TEXT NOT NULL DEFAULT 'USD'");
+  }
+  if (!productCols.includes("group_id")) {
+    db.exec("ALTER TABLE products ADD COLUMN group_id INTEGER");
+    db.exec("UPDATE products SET group_id = id WHERE group_id IS NULL");
   }
 
   db.exec(`

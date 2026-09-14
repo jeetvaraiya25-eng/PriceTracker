@@ -7,51 +7,54 @@
       :root { color-scheme: dark; }
       body {
         margin: 0;
-        width: 320px;
-        background: #0d0d0f;
+        width: 340px;
+        background: #101421;
         color: #f5f5f5;
-        font: 13px Inter, system-ui, sans-serif;
+        font: 13px "Plus Jakarta Sans", system-ui, sans-serif;
       }
-      .wrap { padding: 14px; }
-      h1 { font-size: 14px; margin: 0 0 10px; }
-      p { color: #a1a1aa; line-height: 1.45; }
-      input, button {
+      .wrap { padding: 16px; }
+      h1 { font-size: 15px; margin: 0 0 8px; font-weight: 600; }
+      p { color: #b3c0d4; line-height: 1.45; margin: 0 0 10px; }
+      label { display: block; font-size: 11px; color: #8b93b3; margin-top: 10px; }
+      input, textarea, button {
         width: 100%;
         box-sizing: border-box;
         border-radius: 8px;
         font: inherit;
       }
-      input {
-        background: #0a0a0c;
+      input, textarea {
+        background: #0c101c;
         border: 1px solid rgba(255,255,255,.12);
         color: #f5f5f5;
         padding: 8px 10px;
-        margin: 8px 0;
+        margin-top: 6px;
       }
+      textarea { min-height: 72px; resize: vertical; word-break: break-all; }
       button {
-        background: #4f8cff;
-        color: #06101f;
+        background: #ff488b;
+        color: #101421;
         border: 0;
         font-weight: 600;
-        padding: 9px 10px;
+        padding: 10px;
         cursor: pointer;
+        margin-top: 12px;
       }
       button.ghost {
         background: transparent;
         color: #f5f5f5;
         border: 1px solid rgba(255,255,255,.14);
-        margin-top: 8px;
       }
       .item { padding: 8px 0; border-top: 1px solid rgba(255,255,255,.08); }
-      .price { font-weight: 700; }
+      .price { font-weight: 700; color: #fff; }
       .err { color: #ff5c7a; }
-      .ok { color: #00d97e; }
+      .ok { color: #3ee0a0; }
+      .hint { font-size: 11px; color: #8b93b3; margin-top: 8px; }
     </style>
   </head>
   <body>
     <div class="wrap">
       <h1>Dropwatch</h1>
-      <div id="root">Loading…</div>
+      <div id="root">Open this popup from the Safari or Chrome toolbar.</div>
     </div>
     <script src="popup.js"></script>
   </body>

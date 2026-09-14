@@ -75,10 +75,11 @@ async function handleIncoming(phone, text) {
     await sendWhatsAppMessage(phone, "Looking up that product…");
     try {
       const { addProductFromUrl } = await import("./engine.js");
+      const { formatMoney } = await import("./fx.js");
       const product = await addProductFromUrl(url, user.id);
       await sendWhatsAppMessage(
         phone,
-        `Tracking ${product.name}\nCurrent price: $${Number(product.currentPrice).toFixed(2)}\n${product.source_site || ""}`
+        `Tracking ${product.name}\nCurrent price: ${formatMoney(product.currentPrice, product.currency)}\n${product.source_site || ""}`
       );
     } catch (err) {
       await sendWhatsAppMessage(phone, `Could not add that product: ${err.message}`);

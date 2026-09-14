@@ -1,7 +1,16 @@
 import { db, nowSql } from "./db.js";
-import { scrapeProduct } from "./scraper.js";
+import { scrapeProduct, isJunkName } from "./scraper.js";
+import { queryFromProduct } from "./compare.js";
 import { sendPriceDropEmail } from "./mailer.js";
 import { sendWhatsAppMessage } from "./notify.js";
+import { formatMoney } from "./fx.js";
+import { assertCanAddProduct } from "./plans.js";
+
+function bestName(product, scrapedName) {
+  if (scrapedName && !isJunkName(scrapedName)) return scrapedName;
+  if (product?.name && !isJunkName(product.name)) return product.name;
+  return queryFromProduct({ ...product, name: scrapedName }) || product?.name || scrapedName;
+}
 
 function latestPrice(productId) {
   return db
@@ -35,10 +44,11 @@ export function productWithStats(product) {
     history,
     sparkline: prices.slice(-14),
     targetPrice: alert?.target_price ?? null,
+    currency: product.currency || "USD",
   };
 }
 
-export async function addProductFromUrl(url, userId) {
+export async function addProductFromUrl(url, userId, options = {}) {
   let parsed;
   try {
     parsed = new URL(url);
@@ -60,19 +70,40 @@ export async function addProductFromUrl(url, userId) {
       "INSERT INTO price_history (product_id, price, checked_at) VALUES (?, ?, ?)"
     ).run(existing.id, scraped.price, nowSql());
     db.prepare(
-      "UPDATE products SET name = ?, image_url = ?, source_site = ? WHERE id = ?"
-    ).run(scraped.name, scraped.imageUrl, scraped.sourceSite, existing.id);
+      "UPDATE products SET name = ?, image_url = ?, source_site = ?, currency = ? WHERE id = ?"
+    ).run(
+      bestName(existing, scraped.name),
+      scraped.imageUrl,
+      scraped.sourceSite,
+      scraped.currency || "USD",
+      existing.id
+    );
+    if (options.groupId) {
+      db.prepare("UPDATE products SET group_id = ? WHERE id = ?").run(options.groupId, existing.id);
+    }
     const updated = db.prepare("SELECT * FROM products WHERE id = ?").get(existing.id);
     return productWithStats(updated);
   }
 
+  const owner = db.prepare("SELECT id, plan FROM users WHERE id = ?").get(userId);
+  assertCanAddProduct(owner);
+
   const result = db
     .prepare(
-      `INSERT INTO products (user_id, name, image_url, source_url, source_site)
-       VALUES (?, ?, ?, ?, ?)`
+      `INSERT INTO products (user_id, name, image_url, source_url, source_site, currency, group_id)
+       VALUES (?, ?, ?, ?, ?, ?, NULL)`
     )
-    .run(userId, scraped.name, scraped.imageUrl, sourceUrl, scraped.sourceSite);
+    .run(
+      userId,
+      bestName({ name: scraped.name, source_url: sourceUrl }, scraped.name),
+      scraped.imageUrl,
+      sourceUrl,
+      scraped.sourceSite,
+      scraped.currency || "USD"
+    );
   const id = Number(result.lastInsertRowid);
+  const groupId = options.groupId || id;
+  db.prepare("UPDATE products SET group_id = ? WHERE id = ?").run(groupId, id);
   db.prepare(
     "INSERT INTO price_history (product_id, price, checked_at) VALUES (?, ?, ?)"
   ).run(id, scraped.price, nowSql());
@@ -86,9 +117,10 @@ export async function checkProductPrice(product) {
   db.prepare(
     "INSERT INTO price_history (product_id, price, checked_at) VALUES (?, ?, ?)"
   ).run(product.id, scraped.price, nowSql());
-  db.prepare("UPDATE products SET name = ?, image_url = ? WHERE id = ?").run(
-    scraped.name,
+  db.prepare("UPDATE products SET name = ?, image_url = ?, currency = ? WHERE id = ?").run(
+    bestName(product, scraped.name),
     scraped.imageUrl,
+    scraped.currency || product.currency || "USD",
     product.id
   );
   await maybeFireAlert(product, scraped.price, last?.price);
@@ -121,7 +153,7 @@ async function maybeFireAlert(product, price, previousPrice) {
     try {
       await sendWhatsAppMessage(
         user.whatsapp_phone,
-        `Price dropped on ${product.name}\nNow $${Number(price).toFixed(2)} (target $${Number(alert.target_price).toFixed(2)})\n${product.source_url}`
+        `Price dropped on ${product.name}\nNow ${formatMoney(price, product.currency)}\n(target ${formatMoney(alert.target_price, product.currency)})\n${product.source_url}`
       );
     } catch (err) {
       console.error("WhatsApp alert failed:", err.message);

@@ -1,13 +1,34 @@
-export default function Logo({ compact = false }) {
+function Mark({ size = 28 }) {
   return (
-    <span className="inline-flex items-center gap-2">
-      <span className="relative grid h-8 w-8 place-items-center rounded-lg border border-white/10 bg-[#17171c]">
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden>
-          <path d="M3 8h4.2L9.8 3 13 13" stroke="#4f8cff" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round" />
-          <path d="M9.2 11.2 13 13l-1.7-3.6" stroke="#00d97e" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-        </svg>
-      </span>
-      {!compact && <span className="text-[15px] font-semibold tracking-tight">Dropwatch</span>}
+    <svg width={size} height={size} viewBox="0 0 32 32" fill="none" aria-hidden>
+      <path
+        d="M3.5 19.5h9.2L16.8 6.5 28.5 26"
+        stroke="#ff488b"
+        strokeWidth="2.6"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M20.4 20.2 28.5 26l-3.2-7.4"
+        stroke="#3ee0a0"
+        strokeWidth="2.4"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+export default function Logo({ compact = false, light = false, large = false }) {
+  const word = light ? "text-[#172b76]" : "text-white";
+  return (
+    <span className="inline-flex items-center gap-2.5">
+      <Mark size={large ? 40 : 28} />
+      {!compact && (
+        <span className={`${large ? "text-[28px] font-light" : "text-[17px] font-medium"} tracking-tight ${word}`}>
+          Dropwatch
+        </span>
+      )}
     </span>
   );
 }

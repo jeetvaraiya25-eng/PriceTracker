@@ -1,172 +1,178 @@
+import { useEffect } from "react";
 import { Activity, Bell, Bookmark, Puzzle } from "lucide-react";
 import { Link } from "react-router-dom";
+import DropDemo from "../components/DropDemo.jsx";
 import FeatureCard from "../components/FeatureCard.jsx";
 import { Footer } from "../components/Hero.jsx";
 import Hero from "../components/Hero.jsx";
+import HowItWorks from "../components/HowItWorks.jsx";
 import Navbar from "../components/Navbar.jsx";
-import { Area, AreaChart, ResponsiveContainer } from "recharts";
-
-const demo = [
-  { t: 1, p: 89 },
-  { t: 2, p: 86 },
-  { t: 3, p: 84 },
-  { t: 4, p: 79 },
-  { t: 5, p: 73 },
-];
-
-const stores = ["Amazon", "Best Buy", "Walmart", "Target", "eBay", "Apple"];
+import Reveal from "../components/Reveal.jsx";
+import { useCurrency } from "../context/CurrencyContext.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
+import { isPlus } from "../lib/plans.js";
+import { scrollToId } from "../lib/scroll.js";
 
 export default function Landing() {
+  const { format } = useCurrency();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    const id = window.location.hash.replace("#", "");
+    if (!id) return;
+    const t = window.setTimeout(() => scrollToId(id), 50);
+    return () => window.clearTimeout(t);
+  }, []);
+
   return (
-    <div className="min-h-screen bg-[#0d0d0f]">
+    <div className="min-h-screen bg-[#101421]">
       <Navbar />
-      <Hero />
+      <div>
+        <Hero />
 
-      <section className="border-y border-white/8 py-10">
-        <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 px-5 md:flex-row md:justify-between">
-          <p className="text-xs uppercase tracking-[0.2em] text-[#71717a]">Works with</p>
-          <div className="flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-medium text-[#52525b]">
-            {stores.map((s) => (
-              <span key={s} className="tracking-wide">
-                {s}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <section id="features" className="mx-auto max-w-6xl px-5 py-24">
-        <p className="text-sm font-medium text-[#4f8cff]">Features</p>
-        <h2 className="mt-2 max-w-xl text-3xl font-bold tracking-tight md:text-4xl">
-          One tracking engine. Four ways in.
-        </h2>
-        <div className="mt-10 grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <FeatureCard
-            icon={<Activity size={18} />}
-            title="Real-time tracking"
-            body="We re-check prices on a schedule and keep a full history so you can see the real trend, not a one-off screenshot."
-          />
-          <FeatureCard
-            icon={<Bell size={18} />}
-            title="Smart alerts"
-            body="Set a target price. When it drops below, Dropwatch emails you — and can ping WhatsApp if you’ve connected it."
-          />
-          <FeatureCard
-            icon={<Puzzle size={18} />}
-            title="One-click add via extension"
-            body="A Track this price button appears on product pages. Click it and the item is in your dashboard."
-          />
-          <FeatureCard
-            icon={<Bookmark size={18} />}
-            title="Track from anywhere"
-            body="Paste a link in the dashboard, drop a bookmarklet, or send a URL to the WhatsApp bot. Same engine."
-          />
-        </div>
-      </section>
-
-      <section id="how" className="border-y border-white/8 bg-[#101014] py-24">
-        <div className="mx-auto max-w-6xl px-5">
-          <p className="text-sm font-medium text-[#4f8cff]">How it works</p>
-          <h2 className="mt-2 text-3xl font-bold tracking-tight">Three steps. That’s the whole product.</h2>
-          <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {[
-              { n: "01", t: "Add a product", d: "Paste a URL, use the bookmarklet, click the extension, or send a link in WhatsApp." },
-              { n: "02", t: "We track it", d: "Dropwatch fetches the page, stores the price, and checks again on a schedule." },
-              { n: "03", t: "Get notified", d: "When the price crosses your target, you get an email — and WhatsApp if you want it." },
-            ].map((s) => (
-              <div key={s.n} className="card p-6">
-                <p className="text-xs font-semibold tracking-[0.2em] text-[#4f8cff]">{s.n}</p>
-                <h3 className="mt-3 text-xl font-semibold">{s.t}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#a1a1aa]">{s.d}</p>
+        <div className="relative z-10 rounded-t-[48px] bg-[#f4f6f9]">
+        <section id="features" className="light-section py-24 text-[#172b76]">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <Reveal>
+              <div className="grid gap-10 lg:grid-cols-[0.7fr_1.3fr] lg:items-end">
+                <p className="max-w-xs text-lg leading-7 text-[#172b76]">
+                  Price drops without the refresh cycle
+                </p>
+                <h2 className="font-display text-5xl font-light leading-[1.05] tracking-tight md:text-7xl">
+                  Built for shoppers,
+                  <br />
+                  <span className="text-gradient-pink-on-light">catching every drop</span>
+                </h2>
               </div>
-            ))}
+            </Reveal>
+            <Reveal className="mt-16">
+              <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+                <FeatureCard
+                  light
+                  icon={<Activity size={18} />}
+                  title="Real-time tracking"
+                  body="We re-check prices on a schedule and keep a full history so you can see the real trend, not a one-off screenshot."
+                />
+                <FeatureCard
+                  light
+                  icon={<Bell size={18} />}
+                  title="Smart alerts"
+                  body="Set a target price. When it drops below, Dropwatch emails you."
+                />
+                <FeatureCard
+                  light
+                  icon={<Bookmark size={18} />}
+                  title="Track from anywhere"
+                  body="Paste a product URL or drop the bookmarklet. Free includes 10 products and email alerts."
+                />
+                <FeatureCard
+                  light
+                  icon={<Puzzle size={18} />}
+                  title="Compare shops on Plus"
+                  body="Plus unlocks shop compare, unlimited tracking, the browser extension, and history export."
+                />
+              </div>
+            </Reveal>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <section className="mx-auto max-w-6xl px-5 py-24">
-        <div className="grid items-center gap-10 md:grid-cols-2">
-          <div>
-            <p className="text-sm font-medium text-[#00d97e]">Live drop</p>
-            <h2 className="mt-2 text-3xl font-bold tracking-tight">See the cut. Then buy.</h2>
-            <p className="mt-4 text-[#a1a1aa]">
-              A stylized look at what a real drop feels like in Dropwatch — history, current price, and a clear savings badge.
-            </p>
-          </div>
-          <div className="card relative p-5">
-            <span className="absolute right-5 top-5 rounded-full border border-[#00d97e]/30 bg-[#00d97e]/10 px-3 py-1 text-xs font-semibold text-[#00d97e]">
-              Price dropped 18%!
-            </span>
-            <p className="text-xs uppercase tracking-wide text-[#71717a]">Nike Pegasus 41</p>
-            <p className="mt-1 text-lg font-semibold">Men’s Road Running Shoes</p>
-            <div className="mt-4 flex items-end gap-3">
-              <p className="text-3xl font-bold">$119</p>
-              <p className="pb-1 text-sm text-[#71717a] line-through">$145</p>
-            </div>
-            <div className="mt-4 h-28">
-              <ResponsiveContainer width="100%" height="100%">
-                <AreaChart data={demo}>
-                  <Area type="monotone" dataKey="p" stroke="#00d97e" strokeWidth={2} fill="#00d97e22" />
-                </AreaChart>
-              </ResponsiveContainer>
-            </div>
-          </div>
-        </div>
-      </section>
+        <Reveal>
+          <HowItWorks />
+        </Reveal>
+        <Reveal>
+          <DropDemo />
+        </Reveal>
 
-      <section className="border-y border-white/8 py-20">
-        <div className="mx-auto grid max-w-6xl gap-10 px-5 text-center sm:grid-cols-4">
-          {[
-            ["24k+", "Prices tracked"],
-            ["8.1k", "Alerts sent"],
-            ["40+", "Sites supported"],
-            ["4", "Ways to add"],
-          ].map(([n, l]) => (
-            <div key={l}>
-              <p className="text-4xl font-extrabold tracking-tight">{n}</p>
-              <p className="mt-2 text-sm text-[#71717a]">{l}</p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      <section id="pricing" className="mx-auto max-w-6xl px-5 py-24">
-        <p className="text-sm font-medium text-[#4f8cff]">Pricing</p>
-        <h2 className="mt-2 text-3xl font-bold tracking-tight">Start free. Upgrade when the savings stack.</h2>
-        <div className="mt-10 grid gap-4 md:grid-cols-3">
-          {[
-            { name: "Free", price: "$0", items: ["20 tracked products", "Email alerts", "Bookmarklet"] },
-            { name: "Pro", price: "$8", items: ["Unlimited products", "WhatsApp + email", "Faster checks", "Browser extension"] },
-            { name: "Team", price: "$24", items: ["Shared watchlists", "Priority support", "Export history"] },
-          ].map((p, i) => (
-            <div key={p.name} className={`card p-6 ${i === 1 ? "border-[#4f8cff]/40" : ""}`}>
-              <p className="text-sm text-[#a1a1aa]">{p.name}</p>
-              <p className="mt-2 text-4xl font-bold">
-                {p.price}
-                <span className="text-sm font-normal text-[#71717a]"> /mo</span>
-              </p>
-              <ul className="mt-6 space-y-2 text-sm text-[#a1a1aa]">
-                {p.items.map((it) => (
-                  <li key={it}>· {it}</li>
+        <section id="pricing" className="bg-[#f4f6f9] py-24 text-[#172b76]">
+          <div className="mx-auto max-w-7xl px-5 md:px-8">
+            <Reveal>
+              <p className="text-sm font-medium text-[#ff488b]">Pricing</p>
+              <h2 className="font-display mt-2 text-4xl font-light tracking-tight md:text-5xl">
+                Start free. Upgrade when the savings stack.
+              </h2>
+            </Reveal>
+            <Reveal className="mt-12">
+              <div className="grid items-stretch gap-4 md:grid-cols-2">
+                {[
+                  {
+                    name: "Free",
+                    price: 0,
+                    items: ["10 tracked products", "Email alerts", "Bookmarklet"],
+                    to: user ? "/app" : "/signup?plan=free",
+                    cta: user ? "Open dashboard" : "Get started",
+                  },
+                  {
+                    name: "Plus",
+                    price: 999,
+                    items: [
+                      "Unlimited products",
+                      "Compare across shops",
+                      "Browser extension",
+                      "Export history",
+                      "Priority support",
+                    ],
+                    to: user ? (isPlus(user) ? "/app" : "/signup?plan=plus") : "/signup?plan=plus",
+                    cta: user ? (isPlus(user) ? "Open dashboard" : "Upgrade to Plus") : "Get started",
+                    featured: true,
+                  },
+                ].map((p) => (
+                  <div
+                    key={p.name}
+                    className={`card-light flex h-full flex-col p-7 ${
+                      p.featured ? "border-[#ff488b]/50 shadow-[inset_0_0_0_1px_rgba(255,72,139,0.2)]" : ""
+                    }`}
+                  >
+                    <p className="text-sm text-[#586490]">{p.name}</p>
+                    <p className="mt-2 text-4xl font-semibold">
+                      {format(p.price, "INR")}
+                      <span className="text-sm font-normal text-[#586490]"> /mo</span>
+                    </p>
+                    <ul className="mt-6 flex-1 space-y-2 text-sm text-[#586490]">
+                      {p.items.map((it) => (
+                        <li key={it}>· {it}</li>
+                      ))}
+                    </ul>
+                    <div className="mt-auto pt-8">
+                      <Link
+                        to={p.to}
+                        className={
+                          p.featured
+                            ? "btn-primary flex h-11 w-full items-center justify-center text-sm"
+                            : "btn-ghost-dark flex h-11 w-full items-center justify-center text-sm"
+                        }
+                      >
+                        {p.cta}
+                      </Link>
+                    </div>
+                  </div>
                 ))}
-              </ul>
-              <Link to="/signup" className={i === 1 ? "btn-primary mt-8 block py-2.5 text-center text-sm" : "btn-ghost mt-8 block py-2.5 text-center text-sm"}>
-                Get started
-              </Link>
-            </div>
-          ))}
-        </div>
-      </section>
+              </div>
+            </Reveal>
+          </div>
+        </section>
+      </div>
+      </div>
 
-      <section className="relative overflow-hidden py-24 text-center">
-        <div className="pointer-events-none absolute inset-0 cta-glow" />
-        <div className="relative mx-auto max-w-2xl px-5">
-          <h2 className="text-4xl font-extrabold tracking-tight">Stop refreshing. Start catching drops.</h2>
-          <p className="mt-3 text-[#a1a1aa]">Create a free account and paste your first product URL in under a minute.</p>
-          <Link to="/signup" className="btn-primary mt-8 inline-block px-8 py-3 text-sm">
-            Start tracking for free
-          </Link>
+      <section className="relative overflow-hidden bg-[#101421] py-24 text-center">
+        <div className="pointer-events-none absolute inset-0 opacity-70">
+          <div className="cta-orb absolute left-1/2 top-1/2 h-[420px] w-[720px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#ff488b]/20 blur-3xl" />
         </div>
+        <Reveal>
+          <div className="relative mx-auto max-w-2xl px-5">
+            <h2 className="font-display text-5xl font-light tracking-tight md:text-6xl">
+              Stop refreshing.
+              <br />
+              <span className="text-gradient-pink">Start catching drops.</span>
+            </h2>
+            <p className="mt-4 text-[#b3c0d4]">Create a free account and paste your first product URL in under a minute.</p>
+            <Link
+              to={user ? "/app" : "/signup?plan=free"}
+              className="btn-primary mt-8 inline-block px-8 py-3 text-sm"
+            >
+              {user ? "Open dashboard" : "Start tracking for free"}
+            </Link>
+          </div>
+        </Reveal>
       </section>
 
       <Footer />

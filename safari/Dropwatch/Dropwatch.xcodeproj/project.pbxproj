@@ -1,0 +1,617 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		105881563057FD5700016E1F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105881553057FD5700016E1F /* AppDelegate.swift */; };
+		1058815A3057FD5700016E1F /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = 105881583057FD5700016E1F /* Main.html */; };
+		1058815C3057FD5700016E1F /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 1058815B3057FD5700016E1F /* Icon.png */; };
+		1058815E3057FD5700016E1F /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = 1058815D3057FD5700016E1F /* Style.css */; };
+		105881603057FD5700016E1F /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = 1058815F3057FD5700016E1F /* Script.js */; };
+		105881623057FD5700016E1F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105881613057FD5700016E1F /* ViewController.swift */; };
+		105881653057FD5700016E1F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 105881633057FD5700016E1F /* Main.storyboard */; };
+		105881673057FD5800016E1F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 105881663057FD5800016E1F /* Assets.xcassets */; };
+		1058816E3057FD5800016E1F /* Dropwatch Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 1058816D3057FD5800016E1F /* Dropwatch Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		105881733057FD5800016E1F /* SafariWebExtensionHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 105881723057FD5800016E1F /* SafariWebExtensionHandler.swift */; };
+		105881843057FD5800016E1F /* popup.js in Resources */ = {isa = PBXBuildFile; fileRef = 1058817F3057FD5800016E1F /* popup.js */; };
+		105881853057FD5800016E1F /* background.js in Resources */ = {isa = PBXBuildFile; fileRef = 105881803057FD5800016E1F /* background.js */; };
+		105881863057FD5800016E1F /* popup.html in Resources */ = {isa = PBXBuildFile; fileRef = 105881813057FD5800016E1F /* popup.html */; };
+		105881873057FD5800016E1F /* manifest.json in Resources */ = {isa = PBXBuildFile; fileRef = 105881823057FD5800016E1F /* manifest.json */; };
+		105881883057FD5800016E1F /* content.js in Resources */ = {isa = PBXBuildFile; fileRef = 105881833057FD5800016E1F /* content.js */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		1058816F3057FD5800016E1F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 1058814A3057FD5700016E1F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1058816C3057FD5800016E1F;
+			remoteInfo = "Dropwatch Extension";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		1058817A3057FD5800016E1F /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				1058816E3057FD5800016E1F /* Dropwatch Extension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		105881523057FD5700016E1F /* Dropwatch.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dropwatch.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		105881553057FD5700016E1F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		105881593057FD5700016E1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = Base.lproj/Main.html; sourceTree = "<group>"; };
+		1058815B3057FD5700016E1F /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		1058815D3057FD5700016E1F /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
+		1058815F3057FD5700016E1F /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
+		105881613057FD5700016E1F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		105881643057FD5700016E1F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		105881663057FD5800016E1F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		105881683057FD5800016E1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1058816D3057FD5800016E1F /* Dropwatch Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Dropwatch Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		105881723057FD5800016E1F /* SafariWebExtensionHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebExtensionHandler.swift; sourceTree = "<group>"; };
+		105881743057FD5800016E1F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1058817F3057FD5800016E1F /* popup.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = popup.js; path = ../../../extension/popup.js; sourceTree = "<group>"; };
+		105881803057FD5800016E1F /* background.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = background.js; path = ../../../extension/background.js; sourceTree = "<group>"; };
+		105881813057FD5800016E1F /* popup.html */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = popup.html; path = ../../../extension/popup.html; sourceTree = "<group>"; };
+		105881823057FD5800016E1F /* manifest.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; name = manifest.json; path = ../../../extension/manifest.json; sourceTree = "<group>"; };
+		105881833057FD5800016E1F /* content.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; name = content.js; path = ../../../extension/content.js; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1058814F3057FD5700016E1F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1058816A3057FD5800016E1F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		105881493057FD5700016E1F = {
+			isa = PBXGroup;
+			children = (
+				105881543057FD5700016E1F /* Dropwatch */,
+				105881713057FD5800016E1F /* Dropwatch Extension */,
+				105881533057FD5700016E1F /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		105881533057FD5700016E1F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				105881523057FD5700016E1F /* Dropwatch.app */,
+				1058816D3057FD5800016E1F /* Dropwatch Extension.appex */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		105881543057FD5700016E1F /* Dropwatch */ = {
+			isa = PBXGroup;
+			children = (
+				105881553057FD5700016E1F /* AppDelegate.swift */,
+				105881613057FD5700016E1F /* ViewController.swift */,
+				105881633057FD5700016E1F /* Main.storyboard */,
+				105881663057FD5800016E1F /* Assets.xcassets */,
+				105881683057FD5800016E1F /* Info.plist */,
+				105881573057FD5700016E1F /* Resources */,
+			);
+			path = Dropwatch;
+			sourceTree = "<group>";
+		};
+		105881573057FD5700016E1F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				105881583057FD5700016E1F /* Main.html */,
+				1058815B3057FD5700016E1F /* Icon.png */,
+				1058815D3057FD5700016E1F /* Style.css */,
+				1058815F3057FD5700016E1F /* Script.js */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		105881713057FD5800016E1F /* Dropwatch Extension */ = {
+			isa = PBXGroup;
+			children = (
+				1058817E3057FD5800016E1F /* Resources */,
+				105881723057FD5800016E1F /* SafariWebExtensionHandler.swift */,
+				105881743057FD5800016E1F /* Info.plist */,
+			);
+			path = "Dropwatch Extension";
+			sourceTree = "<group>";
+		};
+		1058817E3057FD5800016E1F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				1058817F3057FD5800016E1F /* popup.js */,
+				105881803057FD5800016E1F /* background.js */,
+				105881813057FD5800016E1F /* popup.html */,
+				105881823057FD5800016E1F /* manifest.json */,
+				105881833057FD5800016E1F /* content.js */,
+			);
+			name = Resources;
+			path = "Dropwatch Extension";
+			sourceTree = SOURCE_ROOT;
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		105881513057FD5700016E1F /* Dropwatch */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 1058817B3057FD5800016E1F /* Build configuration list for PBXNativeTarget "Dropwatch" */;
+			buildPhases = (
+				1058814E3057FD5700016E1F /* Sources */,
+				1058814F3057FD5700016E1F /* Frameworks */,
+				105881503057FD5700016E1F /* Resources */,
+				1058817A3057FD5800016E1F /* Embed Foundation Extensions */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				105881703057FD5800016E1F /* PBXTargetDependency */,
+			);
+			name = Dropwatch;
+			packageProductDependencies = (
+			);
+			productName = Dropwatch;
+			productReference = 105881523057FD5700016E1F /* Dropwatch.app */;
+			productType = "com.apple.product-type.application";
+		};
+		1058816C3057FD5800016E1F /* Dropwatch Extension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 105881773057FD5800016E1F /* Build configuration list for PBXNativeTarget "Dropwatch Extension" */;
+			buildPhases = (
+				105881693057FD5800016E1F /* Sources */,
+				1058816A3057FD5800016E1F /* Frameworks */,
+				1058816B3057FD5800016E1F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Dropwatch Extension";
+			packageProductDependencies = (
+			);
+			productName = "Dropwatch Extension";
+			productReference = 1058816D3057FD5800016E1F /* Dropwatch Extension.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		1058814A3057FD5700016E1F /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2660;
+				LastUpgradeCheck = 2660;
+				TargetAttributes = {
+					105881513057FD5700016E1F = {
+						CreatedOnToolsVersion = 26.6;
+					};
+					1058816C3057FD5800016E1F = {
+						CreatedOnToolsVersion = 26.6;
+					};
+				};
+			};
+			buildConfigurationList = 1058814D3057FD5700016E1F /* Build configuration list for PBXProject "Dropwatch" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 105881493057FD5700016E1F;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 105881533057FD5700016E1F /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				105881513057FD5700016E1F /* Dropwatch */,
+				1058816C3057FD5800016E1F /* Dropwatch Extension */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		105881503057FD5700016E1F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				1058815C3057FD5700016E1F /* Icon.png in Resources */,
+				105881653057FD5700016E1F /* Main.storyboard in Resources */,
+				105881603057FD5700016E1F /* Script.js in Resources */,
+				1058815A3057FD5700016E1F /* Main.html in Resources */,
+				105881673057FD5800016E1F /* Assets.xcassets in Resources */,
+				1058815E3057FD5700016E1F /* Style.css in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		1058816B3057FD5800016E1F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				105881873057FD5800016E1F /* manifest.json in Resources */,
+				105881853057FD5800016E1F /* background.js in Resources */,
+				105881863057FD5800016E1F /* popup.html in Resources */,
+				105881843057FD5800016E1F /* popup.js in Resources */,
+				105881883057FD5800016E1F /* content.js in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		1058814E3057FD5700016E1F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				105881623057FD5700016E1F /* ViewController.swift in Sources */,
+				105881563057FD5700016E1F /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		105881693057FD5800016E1F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				105881733057FD5800016E1F /* SafariWebExtensionHandler.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		105881703057FD5800016E1F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1058816C3057FD5800016E1F /* Dropwatch Extension */;
+			targetProxy = 1058816F3057FD5800016E1F /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		105881583057FD5700016E1F /* Main.html */ = {
+			isa = PBXVariantGroup;
+			children = (
+				105881593057FD5700016E1F /* Base */,
+			);
+			name = Main.html;
+			sourceTree = "<group>";
+		};
+		105881633057FD5700016E1F /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				105881643057FD5700016E1F /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		105881753057FD5800016E1F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		105881763057FD5800016E1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.5;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+			};
+			name = Release;
+		};
+		105881783057FD5800016E1F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Dropwatch Extension/Dropwatch Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Dropwatch Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Dropwatch Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.dropwatch.safari.Extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		105881793057FD5800016E1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Dropwatch Extension/Dropwatch Extension.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Dropwatch Extension/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Dropwatch Extension";
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.14;
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.dropwatch.safari.Extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		1058817C3057FD5800016E1F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Dropwatch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Dropwatch;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.dropwatch.safari;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		1058817D3057FD5800016E1F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
+				ENABLE_USER_SELECTED_FILES = readonly;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Dropwatch/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = Dropwatch;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				INFOPLIST_KEY_NSMainStoryboardFile = Main;
+				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				OTHER_LDFLAGS = (
+					"-framework",
+					SafariServices,
+					"-framework",
+					WebKit,
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = dev.dropwatch.safari;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				REGISTER_APP_GROUPS = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1058814D3057FD5700016E1F /* Build configuration list for PBXProject "Dropwatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				105881753057FD5800016E1F /* Debug */,
+				105881763057FD5800016E1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		105881773057FD5800016E1F /* Build configuration list for PBXNativeTarget "Dropwatch Extension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				105881783057FD5800016E1F /* Debug */,
+				105881793057FD5800016E1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		1058817B3057FD5800016E1F /* Build configuration list for PBXNativeTarget "Dropwatch" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1058817C3057FD5800016E1F /* Debug */,
+				1058817D3057FD5800016E1F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 1058814A3057FD5700016E1F /* Project object */;
+}

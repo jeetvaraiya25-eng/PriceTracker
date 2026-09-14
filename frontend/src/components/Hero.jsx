@@ -1,69 +1,56 @@
+import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import { Area, AreaChart, ResponsiveContainer } from "recharts";
 import Logo from "./Logo.jsx";
-
-const mock = [
-  { t: 1, p: 248 },
-  { t: 2, p: 241 },
-  { t: 3, p: 239 },
-  { t: 4, p: 232 },
-  { t: 5, p: 228 },
-  { t: 6, p: 219 },
-  { t: 7, p: 204 },
-];
+import RibbonBackdrop from "./RibbonBackdrop.jsx";
+import LogoMarquee from "./LogoMarquee.jsx";
+import { useAuth } from "../context/AuthContext.jsx";
+import { handleHashJump } from "../lib/scroll.js";
 
 export default function Hero() {
+  const { user } = useAuth();
+  const copyRef = useRef(null);
+
+  useEffect(() => {
+    const copy = copyRef.current;
+    if (!copy) return;
+    const onScroll = () => {
+      const fade = Math.min(1, Math.max(0, (window.scrollY - 60) / (window.innerHeight * 0.5)));
+      copy.style.opacity = String(1 - fade);
+      copy.style.transform = `translate3d(0, ${fade * -24}px, 0)`;
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
   return (
-    <section className="relative overflow-hidden">
-      <div className="pointer-events-none absolute inset-0 grid-dot opacity-70" />
-      <div className="pointer-events-none absolute inset-0 hero-glow" />
-      <div className="relative mx-auto max-w-6xl px-5 pb-16 pt-20 text-center md:pt-28">
-        <p className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs text-[#a1a1aa]">
-          <span className="h-1.5 w-1.5 rounded-full bg-[#00d97e]" />
-          Price drops, caught automatically
-        </p>
-        <h1 className="mx-auto max-w-3xl text-5xl font-extrabold tracking-tight md:text-7xl">
-          Never overpay again
-        </h1>
-        <p className="mx-auto mt-5 max-w-xl text-lg text-[#a1a1aa]">
-          Track any product across the web. Dropwatch watches the price and alerts you the moment it falls.
-        </p>
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <Link to="/signup" className="btn-primary px-6 py-3 text-sm">
-            Try it now
-          </Link>
-          <a href="#how" className="btn-ghost px-6 py-3 text-sm">
-            See how it works
-          </a>
-        </div>
-        <div className="mx-auto mt-14 max-w-4xl">
-          <div className="card overflow-hidden p-3 md:p-5">
-            <div className="rounded-lg border border-white/8 bg-[#0a0a0c] p-4 md:p-6">
-              <div className="mb-4 flex items-center justify-between text-left">
-                <div>
-                  <p className="text-xs uppercase tracking-wider text-[#71717a]">Tracked product</p>
-                  <p className="mt-1 text-lg font-semibold">Sony WH-1000XM5</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-2xl font-bold">$204.00</p>
-                  <p className="text-sm font-medium text-[#00d97e]">↓ 18% this week</p>
-                </div>
-              </div>
-              <div className="h-40">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={mock}>
-                    <defs>
-                      <linearGradient id="heroFill" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="0%" stopColor="#4f8cff" stopOpacity={0.35} />
-                        <stop offset="100%" stopColor="#4f8cff" stopOpacity={0} />
-                      </linearGradient>
-                    </defs>
-                    <Area type="monotone" dataKey="p" stroke="#4f8cff" strokeWidth={2} fill="url(#heroFill)" />
-                  </AreaChart>
-                </ResponsiveContainer>
+    <section className="sticky top-0 h-[100svh] overflow-hidden">
+      <RibbonBackdrop />
+      <div ref={copyRef} className="relative flex h-full flex-col">
+        <div className="mx-auto flex w-full max-w-7xl flex-1 flex-col justify-end px-5 pb-8 pt-28 md:px-8">
+          <div className="grid items-end gap-10 lg:grid-cols-[1.15fr_0.85fr]">
+            <h1 className="hero-copy font-display max-w-3xl text-[52px] font-light leading-[0.95] tracking-tight text-white sm:text-7xl lg:text-[92px]">
+              Never overpay
+              <br />
+              <span className="text-gradient-pink">again</span>
+            </h1>
+            <div className="hero-copy hero-copy-delay max-w-md pb-2 lg:justify-self-end lg:text-right">
+              <p className="text-[16px] leading-7 text-white/90">
+                Track any product across the web. Dropwatch watches the price and alerts you the moment it falls — in your local currency.
+              </p>
+              <div className="mt-7 flex flex-wrap items-center gap-3 lg:justify-end">
+                <Link to={user ? "/app" : "/signup?plan=free"} className="btn-light px-6 py-3 text-[13px] uppercase">
+                  {user ? "Open dashboard" : "Try it now"}
+                </Link>
+                <a href="#how" className="btn-ghost px-6 py-3 text-[13px] uppercase" onClick={(e) => handleHashJump(e, "how")}>
+                  See how it works
+                </a>
               </div>
             </div>
           </div>
+        </div>
+        <div className="shrink-0 pb-20">
+          <LogoMarquee />
         </div>
       </div>
     </section>
@@ -71,29 +58,41 @@ export default function Hero() {
 }
 
 export function Footer() {
+  const { user } = useAuth();
   return (
-    <footer className="border-t border-white/8">
-      <div className="mx-auto flex max-w-6xl flex-col gap-8 px-5 py-12 md:flex-row md:items-center md:justify-between">
+    <footer className="border-t border-white/8 bg-[#101421]">
+      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-5 py-14 md:flex-row md:items-start md:justify-between md:px-8">
         <div>
           <Logo />
-          <p className="mt-3 max-w-xs text-sm text-[#71717a]">
+          <p className="mt-4 max-w-xs text-sm leading-6 text-[#b3c0d4]">
             Track prices. Catch drops. Buy when it actually makes sense.
           </p>
         </div>
-        <div className="flex gap-10 text-sm text-[#a1a1aa]">
-          <div className="flex flex-col gap-2">
-            <a href="#features" className="hover:text-white">Features</a>
-            <a href="#pricing" className="hover:text-white">Pricing</a>
-            <a href="#how" className="hover:text-white">How it works</a>
+        <div className="flex gap-16 text-sm text-[#b3c0d4]">
+          <div>
+            <p className="mb-3 text-xs font-medium uppercase tracking-[0.16em] text-white">Product</p>
+            <div className="flex flex-col gap-2">
+              <a href="#features" className="hover:text-white" onClick={(e) => handleHashJump(e, "features")}>Features</a>
+              <a href="#pricing" className="hover:text-white" onClick={(e) => handleHashJump(e, "pricing")}>Pricing</a>
+              <a href="#how" className="hover:text-white" onClick={(e) => handleHashJump(e, "how")}>How it works</a>
+            </div>
           </div>
-          <div className="flex flex-col gap-2">
-            <Link to="/login" className="hover:text-white">Log in</Link>
-            <Link to="/signup" className="hover:text-white">Get started</Link>
-            <a href="https://www.whatsapp.com/" className="hover:text-white" target="_blank" rel="noreferrer">WhatsApp</a>
+          <div>
+            <p className="mb-3 text-xs font-medium uppercase tracking-[0.16em] text-white">Account</p>
+            <div className="flex flex-col gap-2">
+              {user ? (
+                <Link to="/app" className="hover:text-white">Open dashboard</Link>
+              ) : (
+                <>
+                  <Link to="/login" className="hover:text-white">Log in</Link>
+                  <Link to="/signup?plan=free" className="hover:text-white">Get started</Link>
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>
-      <div className="border-t border-white/8 py-5 text-center text-xs text-[#71717a]">
+      <div className="border-t border-white/8 py-5 text-center text-xs text-[#586490]">
         © {new Date().getFullYear()} Dropwatch. All rights reserved.
       </div>
     </footer>

@@ -45,8 +45,27 @@ export function AuthProvider({ children }) {
         setTok(null);
         setUser(null);
       },
+      setUser,
       refresh: async () => {
         const data = await api("/api/auth/me");
+        setUser(data.user);
+        return data.user;
+      },
+      saveUsername: async (username) => {
+        let data;
+        try {
+          data = await api("/api/account/profile", { method: "PATCH", body: { username } });
+        } catch (err) {
+          if (!/404|405|failed \(40/.test(err.message)) throw err;
+          data = await api("/api/account/profile", { method: "POST", body: { username } });
+        }
+        if (!data?.user) throw new Error("Could not save username");
+        setUser(data.user);
+        return data.user;
+      },
+      savePlan: async (plan) => {
+        const data = await api("/api/account/plan", { method: "PATCH", body: { plan } });
+        if (!data?.user) throw new Error("Could not update plan");
         setUser(data.user);
         return data.user;
       },
